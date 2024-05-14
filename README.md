@@ -1,40 +1,45 @@
-### Prepare for experiments
+### Setting Up the Environment
 
-Simply run `conda create --name myenv --file requirements.txt`.
-
-### Generate graph embeddings
-
-1. You can start with run.sh, and change the mode for finetuning, KL optimization and dataset for desired k-level embedding.
-
-2. Or you can run the code and get one desired graph embedding.
-   Eg. Here we get the graph embedding for 4-core community search for citeseer dataset(the maximum k-core is 7.)
-
-   `python main.py\
-               --Script_mode=pretraining_kcore\
-               --distance=Cosine\
-               --epochs=20\
-               --batch_size=2048\
-               --k_num=4\
-               --round_num=7\
-               --sample_version=0\
-               --loadfromexist_qc=0\
-               --loadfromexist_sp=0\
-               --dataset=citeseer\
-               --k_plus_finetuning=0\
-               --query_community_num=20\
-               --sampling_triplets_num=8000\
-               --device=1`
+1. **Create a Python Environment:**
+   - Use the following command to create a Conda environment using the `requirements.txt` file. This file should contain all the necessary packages.
+     `conda create --name myenv --file requirements.txt`
+   - Activate the environment:
+     `conda activate myenv`
 
 
 
-### Compress graph embeddings
+### Generate Graph Embeddings
 
-1. Run the code and get the compressed graph embeddings and Encoder-Decoder weights.
+1. **Start with `run.sh`:**
 
+- You can initiate the process using `run.sh` and modify the script to set the mode for finetuning, KL optimization, and select the dataset for generating graph embeddings as required.
+
+2. **Run the Code for Specific Graph Embedding:**
+
+- Example command to generate graph embeddings for the 4-core community search on the Citeseer dataset:
+  `python main.py \
+              --Script_mode=pretraining_kcore \
+              --distance=Cosine \
+              --epochs=20 \
+              --batch_size=2048 \
+              --k_num=4 \
+              --round_num=7 \
+              --sample_version=0 \
+              --loadfromexist_qc=0 \
+              --loadfromexist_sp=0 \
+              --dataset=citeseer \
+              --k_plus_finetuning=0 \
+              --query_community_num=20 \
+              --sampling_triplets_num=8000 \
+              --device=1`
+
+### Compress Graph Embeddings
+
+1. **Generate Compressed Embeddings and Model Weights:**
    `python ED_model.py`
+2. **Evaluate Compressed Embeddings:**
+   - Test the quality of the compressed graph embeddings during the community search stage:
+     `python get_draw.py`
 
-2. Run the code and test the quality of compressed graph embeddings in the community search stage.
 
-   `python get_draw.py`
 
-   
