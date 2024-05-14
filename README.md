@@ -1,5 +1,6 @@
 ### Prepare for experiments
-Simply run 'conda create --name myenv --file requirements.txt'.
+
+Simply run `conda create --name myenv --file requirements.txt`.
 
 ### Generate graph embeddings
 
