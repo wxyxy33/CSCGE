@@ -1,3 +1,6 @@
+### Prepare for experiments
+Simply run 'conda create --name myenv --file requirements.txt'.
+
 ### Generate graph embeddings
 
 1. You can start with run.sh, and change the mode for finetuning, KL optimization and dataset for desired k-level embedding.
