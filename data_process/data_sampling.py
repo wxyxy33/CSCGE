@@ -133,54 +133,6 @@ class Sampler:
                     
             idMapidx = node_map
             edges_undirect = np.array(adj_lists)
-        
-        elif self.dataset_name == 'reddit':
-            pass
-
-    
-        elif self.dataset_name == 'Amazon0302':
-            # 读取边列表
-            edges_path = self.dataset_path + '/' + 'amazon0302.txt'
-            edges_undirect = []
-            with open(edges_path, 'r') as fp:
-                for line in fp:
-                    if not line.startswith("#"):  # 忽略文件中的注释行
-                        edge = line.strip().split('\t')
-                        edge = [int(i) for i in edge]
-                        edges_undirect.append(edge)
-            edges_undirect = np.array(edges_undirect)
-            nodes = np.unique(edges_undirect.flatten())
-            idMapidx = {j: i for i, j in enumerate(nodes)}
-
-
-        elif self.dataset_name == 'com-dblp':
-            # 读取边列表
-            edges_path = self.dataset_path + '/' + 'com-dblp.ungraph.txt'
-            edges_undirect = []
-            with open(edges_path, 'r') as fp:
-                for line in fp:
-                    if not line.startswith("#"):  # 忽略文件中的注释行
-                        edge = line.strip().split('\t')
-                        edge = [int(i) for i in edge]
-                        edges_undirect.append(edge)
-            edges_undirect = np.array(edges_undirect)
-            nodes = np.unique(edges_undirect.flatten())
-            idMapidx = {j: i for i, j in enumerate(nodes)}
-
-
-        elif self.dataset_name == 'web-BerkStan':
-            # 读取边列表
-            edges_path = self.dataset_path + '/' + 'web-BerkStan.txt'
-            edges_undirect = []
-            with open(edges_path, 'r') as fp:
-                for line in fp:
-                    if not line.startswith("#"):  # 忽略文件中的注释行
-                        edge = line.strip().split('\t')
-                        edge = [int(i) for i in edge]
-                        edges_undirect.append(edge)
-            edges_undirect = np.array(edges_undirect)
-            nodes = np.unique(edges_undirect.flatten())
-            idMapidx = {j: i for i, j in enumerate(nodes)}
 
         
         return edges_undirect, idMapidx
@@ -198,7 +150,6 @@ class Sampler:
         try:
             graph = self.get_nx_graph(self.dataset_path, dataset=self.dataset_name)
             kcore = nx.k_core(G=graph, k=k_value)
-            # ... 其余的方法代码 ...
         except Exception as e:
             print("Error in k_core computation:", e)
             if 'graph' in locals() or 'graph' in globals():
